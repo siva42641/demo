@@ -1,49 +1,33 @@
 from pytrends.request import TrendReq
 import pandas as pd
 
-def get_google_trends(geo_code='US', num_topics=10):
+def get_google_daily_trends(country_code='US'):
     """
-    Fetches the top daily trending topics from Google Trends for a specified region.
-
+    Fetches the daily trending searches from Google for a specific country.
+    
     Args:
-        geo_code (str): Two-letter country code (e.g., 'US', 'GB', 'IN').
-        num_topics (int): The number of top topics to retrieve.
-
+        country_code (str): The two-letter country code (e.g., 'US', 'IN', 'GB').
+        
     Returns:
-        pd.DataFrame: A DataFrame containing the trending topics.
+        pd.DataFrame: A DataFrame containing the trending searches, or None on failure.
     """
+    pytrends = TrendReq(hl='en-US', tz=360)
     try:
-        pytrends = TrendReq(hl='en-US', tz=360)
-        daily_trends = pytrends.trending_searches(pn=geo_code)
-
-        if not daily_trends.empty:
-            # Extract and clean the list of topics
-            trends_list = []
-            for index, row in daily_trends.head(num_topics).iterrows():
-                if 'title' in row[0]:
-                    title = row[0]['title'].strip()
-                    explore_link = f"https://trends.google.com/trends/trendingsearches/daily?pn={geo_code}"
-                    trends_list.append({'Title': title, 'Source': 'Google Trends', 'Link': explore_link})
-                else:
-                    # Handle case where the list is a single string or other format
-                    for item in row[0]:
-                        if isinstance(item, dict) and 'title' in item:
-                            title = item['title'].strip()
-                            explore_link = f"https://trends.google.com/trends/trendingsearches/daily?pn={geo_code}"
-                            trends_list.append({'Title': title, 'Source': 'Google Trends', 'Link': explore_link})
-            
-            return pd.DataFrame(trends_list)
-        else:
-            return pd.DataFrame()
-
+        daily_trends_df = pytrends.trending_searches(pn=country_code)
+        return daily_trends_df
     except Exception as e:
-        print(f"Error fetching Google Trends: {e}")
-        return pd.DataFrame()
+        print(f"Error fetching Google daily trends: {e}")
+        return None
 
-if __name__ == '__main__':
-    trends_df = get_google_trends()
-    if not trends_df.empty:
-        print("Latest trending topics from Google Trends:")
-        print(trends_df)
-    else:
-        print("Failed to fetch Google Trends data.")
+if __name__ == "__main__":
+    # Fetch trends for the United States
+    trends = get_google_daily_trends(country_code='US')
+    
+    if trends is not None:
+        print("Latest Google Daily Trends (US):")
+        if not trends.empty:
+            # The '0' column contains the trending searches
+            for index, row in trends.iterrows():
+                print(f"- {row[0]}")
+        else:
+            print("No trends available.")
