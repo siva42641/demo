@@ -35,7 +35,7 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           python --version
-          python google_trends.py
+          python Fetchtopics.py
   test:
       runs-on: ubuntu-latest
       needs: build # This job depends on the 'build' job
