@@ -12,7 +12,7 @@ FEEDS = [
     "https://www.theverge.com/rss/index.xml"
 ]
 SUMMARY_SENTENCES = 5
-WP_URL = "https://yourdomain.com/wp-json/wp/v2/posts"
+WP_URL = "https://siva42641.wpcomstaging.com/wp-json/wp/v2/posts"
 WP_USER = os.environ.get("WP_USER")        # set in GitHub secrets
 WP_PASS = os.environ.get("WP_PASS")        # set in GitHub secrets (application password)
 def fetch_article_text(url):
