@@ -6,6 +6,8 @@ from newspaper import Article
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.lex_rank import LexRankSummarizer
+import nltk
+nltk.download('punkt')
 # CONFIG
 FEEDS = [
     "https://news.ycombinator.com/rss",
