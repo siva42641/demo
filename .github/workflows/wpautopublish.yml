@@ -14,6 +14,8 @@ jobs:
       - name: Install dependencies
         run: |
           pip install feedparser newspaper3k sumy requests lxml_html_clean
+      - name: Download NLTK punkt data
+        run: python -c "import nltk; nltk.download('punkt')"
       - name: Run publisher
         env:
           WP_USER: ${{ secrets.WP_USER }}
