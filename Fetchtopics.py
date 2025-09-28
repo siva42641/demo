@@ -1,21 +1,25 @@
-import os
-# Input and output file paths
-input_file = "seed_keywords.txt"
-output_dir = "output"
-output_file = os.path.join(output_dir, "ideas.txt")
-# Ensure output directory exists
-os.makedirs(output_dir, exist_ok=True)
-# Read seed keywords
-with open(input_file, "r") as f:
-    seeds = [line.strip() for line in f if line.strip()]
-# Generate ideas (simple expansion logic, replace with your own later)
-ideas = []
-for s in seeds:
-    ideas.append(f"{s} automation ideas")
-    ideas.append(f"{s} monetization strategies")
-    ideas.append(f"Top 10 {s} use cases")
-    ideas.append(f"{s} project starter templates")
-# Write ideas to file
-with open(output_file, "w") as f:
-    f.write("\n".join(ideas))
-print(f":white_tick: Generated {len(ideas)} ideas in {output_file}")
+from pytrends.request import TrendReq
+import requests, time, json, os, datetime as dt
+os.makedirs("data", exist_ok=True)
+pytrends = TrendReq(hl='en-US', tz=330)
+def google_trends(seed):
+    pytrends.build_payload([seed], timeframe='now 7-d', geo='IN')
+    related = pytrends.related_queries()
+    rising = related.get(seed, {}).get('rising', [])
+    return [r['query'] for r in (rising.to_dict('records') if hasattr(rising,'to_dict') else [])]
+def stackexchange(tag):
+    url = f"https://api.stackexchange.com/2.3/search?order=desc&sort=votes&tagged={tag}&site=stackoverflow&pagesize=20"
+    return [i['title'] for i in requests.get(url, timeout=20).json().get('items',[])]
+def main():
+    seeds = open("data/seed_keywords.txt").read().splitlines()
+    ideas = {}
+    for s in seeds:
+        ideas[s] = {
+            "trends": google_trends(s)[:10],
+            "stack": stackexchange(s.split()[0])[:10]
+        }
+        time.sleep(1)
+    stamp = dt.datetime.utcnow().strftime("%Y%m%d%H%M")
+    with open(f"data/ideas_{stamp}.json","w") as f: json.dump(ideas,f,indent=2)
+if __name__ == "__main__":
+    main()
