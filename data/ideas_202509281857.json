@@ -1,0 +1,45 @@
+{
+  "data": {
+    "trends": [
+      "epfo payroll data july 2025",
+      "live data selling 5g",
+      "poshan abhiyaan icds data entry",
+      "poshan abhiyaan icds",
+      "\u092a\u094b\u0937\u0923 \u0905\u092d\u093f\u092f\u093e\u0928 \u0921\u093e\u091f\u093e \u090f\u0902\u091f\u094d\u0930\u0940",
+      "\u092a\u094b\u0937\u0923 \u0905\u092d\u093f\u092f\u093e\u0928 \u090f\u0902\u091f\u094d\u0930\u0940",
+      "jan andolan login",
+      "poshan abhiyaan jan andolan 2025 data entry",
+      "how to transfer data from android to iphone",
+      "android to iphone data transfer"
+    ],
+    "stack": []
+  },
+  "devops": {
+    "trends": [
+      "devsecops vs devops",
+      "devops tutorial for beginners",
+      "gitlab",
+      "direct devops blog"
+    ],
+    "stack": [
+      "Docker container will automatically stop after &quot;docker run -d&quot;",
+      "How to keep Docker container running after starting services?",
+      "My docker container has no internet",
+      "Error: Failed to download metadata for repo &#39;appstream&#39;: Cannot prepare internal mirrorlist: No URLs in mirrorlist",
+      "How do I change timezone in a docker container?",
+      "Docker-compose, conditional statements? (e.g. add volume only if condition)",
+      "Cannot kill container: &lt;container-id&gt;: tried to kill container, but did not receive an exit event",
+      "How can I change permission of mounted volumes in docker-compose.yml from the docker-compose.yml?",
+      "Using docker-compose to set containers timezones",
+      "ERROR: Service &quot;xxx&quot; uses an undefined network &quot;xxx&quot;"
+    ]
+  },
+  "datascience": {
+    "trends": [
+      "coursera",
+      "kaggle",
+      "github"
+    ],
+    "stack": []
+  }
+}
