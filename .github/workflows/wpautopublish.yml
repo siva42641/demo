@@ -13,7 +13,7 @@ jobs:
           python-version: "3.11"
       - name: Install dependencies
         run: |
-          pip install feedparser newspaper3k sumy requests lxml_html_clean
+          pip install feedparser newspaper3k sumy requests lxml_html_clean numpy
       - name: Download NLTK data
         run: |
           python -c "import nltk; nltk.download('punkt'); nltk.download('punkt_tab')"
