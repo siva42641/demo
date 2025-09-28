@@ -13,7 +13,7 @@ jobs:
           python-version: "3.11"
       - name: Install dependencies
         run: |
-          pip install feedparser newspaper3k sumy requests
+          pip install feedparser newspaper3k sumy requests lxml_html_clean
       - name: Run publisher
         env:
           WP_USER: ${{ secrets.WP_USER }}
